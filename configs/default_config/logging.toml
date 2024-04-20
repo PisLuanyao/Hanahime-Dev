@@ -1,0 +1,4 @@
+[logging]
+# Console日志記錄等級
+# 可选的级别有DEBUG, INFO, WARNING, ERROR, CRITICAL
+level = "DEBUG"

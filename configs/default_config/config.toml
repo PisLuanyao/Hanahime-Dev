@@ -1,0 +1,9 @@
+[max_workers]
+# 設置最大綫程數,请填写数字
+# 默认值为 "default"
+threads = "default"
+
+[websocket_server]
+# WebSocketServer設定
+host = "localhost"
+port = 8760
