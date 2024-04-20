@@ -18,7 +18,7 @@ receiver = MessageReceiver()
 message_queue = Queue()
 # 创建一个线程池
 max_workers = config.get('max_workers', {}).get('threads', '2')
-max_workers = multiprocessing.cpu_count() * 4 if max_workers == 'default' else max_workers
+max_workers = multiprocessing.cpu_count() * 4 if max_workers == 'default' else int(max_workers)
 logger.debug(f"创建线程池: {max_workers}线程")
 thread_pool = ThreadPoolExecutor(max_workers=max_workers)
 
