@@ -13,7 +13,6 @@ import multiprocessing
 
 # 加载配置文件
 main_config = load_config('config')
-# config = load_config('err')
 # 创建一个MessageReceiver实例
 receiver = MessageReceiver()
 # 创建一个消息队列
@@ -65,4 +64,5 @@ if __name__ == '__main__':
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
     except KeyboardInterrupt:
+        logger.info("发送关闭通知……")
         logger.error("KeyboardInterrupt")
