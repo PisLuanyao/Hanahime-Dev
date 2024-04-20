@@ -1,6 +1,8 @@
 import asyncio
 import json
+import os
 import websockets
+
 from lunaryu.ConfigManager import LoadConfig as load_config
 from lunaryu.MessageReceiver import MessageReceiver
 from lunaryu.PluginLoader import PluginLoader
@@ -10,14 +12,14 @@ from queue import Queue
 import multiprocessing
 
 # 加载配置文件
-config = load_config('config')
-
+main_config = load_config('config')
+# config = load_config('err')
 # 创建一个MessageReceiver实例
 receiver = MessageReceiver()
 # 创建一个消息队列
 message_queue = Queue()
 # 创建一个线程池
-max_workers = config.get('max_workers', {}).get('threads', '2')
+max_workers = main_config.get('max_workers', {}).get('threads', '2')
 max_workers = multiprocessing.cpu_count() * 4 if max_workers == 'default' else int(max_workers)
 logger.debug(f"创建线程池: {max_workers}线程")
 thread_pool = ThreadPoolExecutor(max_workers=max_workers)
@@ -53,7 +55,7 @@ async def websocket_server(websocket, path):
 
 if __name__ == '__main__':
     plugin_loader = PluginLoader()
-    plugins = plugin_loader.load_plugins('./plugin')
+    plugins = plugin_loader.load_plugins(os.path.join('.', 'plugin'))
     for plugin in plugins:
         receiver.add_plugin(plugin)  # 将插件添加到MessageReceiver实例中
 

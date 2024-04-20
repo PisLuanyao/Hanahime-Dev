@@ -1,4 +1,13 @@
-[logging]
-# Console日志記錄等級
 # 可选的级别有DEBUG, INFO, WARNING, ERROR, CRITICAL
-level = "DEBUG"
+[console]
+# Console输出等級
+logfile_level = "DEBUG"
+
+[logfile]
+# 日志文件記錄设定
+## 设定记录等级
+logfile_level = "INFO"
+## 设定单个记录文件大小(单位: MB)
+logfile_size = 128
+## 是否禁用日志文件[false:正常记录, true:禁止记录日志到文件(不推荐)]
+disable_logfile = false

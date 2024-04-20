@@ -22,7 +22,7 @@ class PluginLoader:
                             loaded_plugin_names.append(plugin_name)
                     else:
                         error_plugin_names.append(entry.name)  # 如果没有index.py，添加到错误列表
-                        logger.info(f'[v2模式] 文件夹 {entry.name} 中缺少 index.py 无法加载插件')
+                        logger.info(f'[v2模式] 文件夹 \u001b[33m{entry.name}\u001b[0m \u001b[97m中缺少 index.py 无法加载插件')
                 elif entry.is_file() and entry.name.endswith('.py'):
                     plugin_name = entry.name[:-3]
                     logger.debug(f'[v1模式] 加载插件 {plugin_name}')
@@ -32,7 +32,7 @@ class PluginLoader:
                         loaded_plugin_names.append(plugin_name)
             except Exception as e:
                 error_plugin_names.append(entry.name)  # 添加出错的插件名称到列表
-                logger.info(f'加载插件 {entry.path} 时发生错误: {e}')
+                logger.info(f'加载插件 \u001b[33m{entry.path}\u001b[0m \u001b[97m时发生错误: \u001b[31m{e}')
         # 在遍历结束后打印成功和错误的插件列表
         logger.success(f'有 {len(loaded_plugin_names)} 个插件被成功加载\nSuccessfully loaded: {loaded_plugin_names} ')
         if error_plugin_names:  # 如果有错误的插件
