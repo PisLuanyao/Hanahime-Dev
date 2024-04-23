@@ -23,3 +23,9 @@ def LoadConfig(conf_name):
     # 加载配置文件
     logger.info(f'Loaded Config: {conf_name}')
     return toml.load(current_config_path)
+
+def LoadConfigByCustomPath(conf_name, conf_path):
+    None
+
+def WriteSysConfig(conf_name):
+    None

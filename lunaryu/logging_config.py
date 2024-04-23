@@ -1,4 +1,5 @@
 import datetime
+
 from loguru import logger
 from sys import stdout
 from lunaryu.LoadBasicConfig import LoadConfig as load_config

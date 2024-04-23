@@ -2,6 +2,7 @@ import os
 import importlib.util
 from lunaryu.logging_config import logger
 
+
 class PluginLoader:
     def load_plugins(self, plugin_dir):
         plugins = []
@@ -22,7 +23,8 @@ class PluginLoader:
                             loaded_plugin_names.append(plugin_name)
                     else:
                         error_plugin_names.append(entry.name)  # 如果没有index.py，添加到错误列表
-                        logger.info(f'[v2模式] 文件夹 \u001b[33m{entry.name}\u001b[0m \u001b[97m中缺少 index.py 无法加载插件')
+                        logger.info(
+                            f'[v2模式] 文件夹 \u001b[33m{entry.name}\u001b[0m \u001b[97m中缺少 index.py 无法加载插件')
                 elif entry.is_file() and entry.name.endswith('.py'):
                     plugin_name = entry.name[:-3]
                     logger.debug(f'[v1模式] 加载插件 {plugin_name}')
@@ -46,4 +48,3 @@ class PluginLoader:
         if hasattr(module, 'Plugin'):
             return module.Plugin()
         return None
-

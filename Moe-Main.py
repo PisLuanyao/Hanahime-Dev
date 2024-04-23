@@ -1,15 +1,14 @@
 import asyncio
 import json
+import multiprocessing
 import os
-import websockets
+from concurrent.futures import ThreadPoolExecutor
+from queue import Queue
 
 from lunaryu.ConfigManager import LoadConfig as load_config
 from lunaryu.MessageReceiver import MessageReceiver
 from lunaryu.PluginLoader import PluginLoader
 from lunaryu.logging_config import logger
-from concurrent.futures import ThreadPoolExecutor
-from queue import Queue
-import multiprocessing
 
 # 加载配置文件
 main_config = load_config('config')
@@ -48,8 +47,9 @@ async def websocket_server(websocket, path):
                 logger.debug(f"{message}")
         else:
             message_queue.put(message)  # 将消息放入队列
+            # noinspection PyAsyncCall
             asyncio.create_task(process_message_from_queue())  # 在后台处理消息
-        await websocket.send('Message received')
+        # await websocket.send('Message received')
 
 
 if __name__ == '__main__':
@@ -58,11 +58,11 @@ if __name__ == '__main__':
     for plugin in plugins:
         receiver.add_plugin(plugin)  # 将插件添加到MessageReceiver实例中
 
-    start_server = websockets.serve(websocket_server, 'localhost', 8760)
+    # start_server = websockets.serve(websocket_server, 'localhost', 8760)
 
     try:
-        asyncio.get_event_loop().run_until_complete(start_server)
+        #    asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
     except KeyboardInterrupt:
         logger.info("发送关闭通知……")
-        logger.error("KeyboardInterrupt")
+        logger.warning("KeyboardInterrupt")
