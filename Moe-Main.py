@@ -5,10 +5,10 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
 
-from lunaryu.ConfigManager import LoadConfig as load_config
-from lunaryu.MessageReceiver import MessageReceiver
-from lunaryu.PluginLoader import PluginLoader
-from lunaryu.logging_config import logger
+from lunaryu.utils.ConfigManager import LoadConfig as load_config
+from lunaryu.utils.MessageReceiver import MessageReceiver as MessageReceiver
+from lunaryu.utils.PluginLoader import PluginLoader as PluginLoader
+from lunaryu.utils.logging_config import logger
 
 # 加载配置文件
 main_config = load_config('config')
@@ -28,7 +28,7 @@ async def process_message_from_queue():
         message = await asyncio.get_event_loop().run_in_executor(thread_pool, message_queue.get)
         if message is None:  # 如果消息是None，代表是退出信号
             break
-        receiver.process_message(message)  # 使用MessageReceiver实例处理消息
+        receiver._process_message(message)  # 使用MessageReceiver实例处理消息
 
 
 async def websocket_server(websocket, path):
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     plugin_loader = PluginLoader()
     plugins = plugin_loader.load_plugins(os.path.join('.', 'plugin'))
     for plugin in plugins:
-        receiver.add_plugin(plugin)  # 将插件添加到MessageReceiver实例中
+        receiver._add_plugin(plugin)  # 将插件添加到MessageReceiver实例中
 
     # start_server = websockets.serve(websocket_server, 'localhost', 8760)
 
