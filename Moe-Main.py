@@ -28,7 +28,7 @@ async def process_message_from_queue():
         message = await asyncio.get_event_loop().run_in_executor(thread_pool, message_queue.get)
         if message is None:  # 如果消息是None，代表是退出信号
             break
-        receiver._process_message(message)  # 使用MessageReceiver实例处理消息
+        receiver.process_message(message)  # 使用MessageReceiver实例处理消息
 
 
 async def websocket_server(websocket, path):
