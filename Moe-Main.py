@@ -5,9 +5,9 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
 
-from lunaryu.utils.ConfigManager import LoadConfig as load_config
-from lunaryu.utils.MessageReceiver import MessageReceiver as MessageReceiver
-from lunaryu.utils.PluginLoader import PluginLoader as PluginLoader
+from lunaryu.core.ConfigManager import LoadConfig as load_config
+from lunaryu.core.MessageReceiver import MessageReceiver as MessageReceiver
+from lunaryu.core.PluginLoader import PluginLoader as PluginLoader
 from lunaryu.utils.logging_config import logger
 
 # 加载配置文件
