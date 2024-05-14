@@ -5,10 +5,10 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
 
-from lunaryu.utils.ConfigManager import LoadConfig as load_config
-from lunaryu.utils.MessageReceiver import MessageReceiver as MessageReceiver
-from lunaryu.utils.PluginLoader import PluginLoader as PluginLoader
-from lunaryu.utils.logging_config import logger
+from hanahime.core.ConfigManager import LoadConfig as load_config
+from hanahime.core.MessageReceiver import MessageReceiver as MessageReceiver
+from hanahime.core.PluginLoader import PluginLoader as PluginLoader
+from hanahime.utils.logging_config import logger
 
 # 加载配置文件
 main_config = load_config('config')
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     plugin_loader = PluginLoader()
     plugins = plugin_loader.load_plugins(os.path.join('.', 'plugin'))
     for plugin in plugins:
-        receiver._add_plugin(plugin)  # 将插件添加到MessageReceiver实例中
+        receiver.add_plugin(plugin)  # 将插件添加到MessageReceiver实例中
 
     # start_server = websockets.serve(websocket_server, 'localhost', 8760)
 
