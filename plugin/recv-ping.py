@@ -3,4 +3,4 @@ class Plugin:
         None
 
     def handle_message(self, message):
-        None
+        return None
