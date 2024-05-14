@@ -6,10 +6,10 @@ import websockets
 from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
 
-from lunaryu.core.ConfigManager import LoadConfig as load_config
-from lunaryu.core.MessageReceiver import MessageReceiver as MessageReceiver
-from lunaryu.core.PluginLoader import PluginLoader as PluginLoader
-from lunaryu.utils.logging_config import logger
+from hanahime.core.ConfigManager import LoadConfig as load_config
+from hanahime.core.MessageReceiver import MessageReceiver as MessageReceiver
+from hanahime.core.PluginLoader import PluginLoader as PluginLoader
+from hanahime.utils.logging_config import logger
 
 # 加载配置文件
 main_config = load_config('config')
