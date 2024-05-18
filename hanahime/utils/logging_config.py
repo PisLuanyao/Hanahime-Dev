@@ -2,7 +2,7 @@ import datetime
 
 from loguru import logger
 from sys import stdout
-from .LoadBasicConfig import _LoadConfig as load_config
+from .LoadBasicConfig import _LoadConfig as LoadConfig
 
 # 配置日志记录器
 log_file = f"./logs/{datetime.datetime.now():%b-%d-%Y}.log"
@@ -16,12 +16,13 @@ logger_format = (
 
 logger.remove()  # 先移除，再添加回来
 
-logging_config = load_config('logging')
+logging_config = LoadConfig('logging')
 disable_logfile = logging_config.get('logfile', {}).get('disable_logfile', False)
 if not disable_logfile:
     rotation = f"{logging_config.get('logfile', {}).get('logfile_size', 16)} MB"
     logfile_level = logging_config.get('logfile', {}).get('logfile_level', 'INFO')
-    logger.add(log_file, rotation=rotation, level=logfile_level, format=logger_format)
+    logger.add(log_file, rotation=rotation, level=logfile_level,
+               format=logger_format, retention=16, compression='zip')
 else:
     print("⚠⚠⚠ 已禁用日志文件, 这是不推荐的做法 ⚠⚠⚠")
 

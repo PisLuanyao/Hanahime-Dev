@@ -6,8 +6,10 @@ from hanahime.utils.logging_config import logger
 from hanahime.other.datetime import StrTime
 
 
+@logger.catch
 def LoadConfig(conf_name):
     logger.debug(f'Loading Config: {conf_name}')
+    current_config_dir = f'./configs/current_config'
     current_config_path = f'./configs/current_config/{conf_name}.toml'
     default_config_path = f'./configs/default_config/{conf_name}.toml'
 
@@ -46,6 +48,8 @@ def RestoreConfig(conf_name):
     default_config_path = f'./configs/default_config/{conf_name}.toml'
 
     # 确保备份文件夹存在
+    if not os.path.isdir(backup_config_dir):
+        os.remove(backup_config_dir)
     os.makedirs(backup_config_dir, exist_ok=True)
 
     if os.path.exists(current_config_path):  # 尝试还原配置文件

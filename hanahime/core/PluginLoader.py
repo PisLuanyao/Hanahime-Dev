@@ -4,6 +4,7 @@ from hanahime.utils.logging_config import logger
 
 
 class PluginLoader:
+    @logger.catch
     def load_plugins(self, plugin_dir):
         plugins = []
         loaded_plugin_names = []  # 新增一个列表来记录成功加载的插件名称

@@ -1,4 +1,4 @@
-# 可选的级别有DEBUG, INFO, WARNING, ERROR, CRITICAL
+# 可选的级别有 TRACE, DEBUG, INFO, WARNING, ERROR, CRITICAL
 [console]
 # Console输出等級
 logfile_level = "DEBUG"
